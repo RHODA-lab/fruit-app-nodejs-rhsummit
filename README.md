@@ -40,12 +40,12 @@ oc apply -f k8s/deploy-nodejs-mysql.yaml
 
 ### Commands to run currently:
 
-- install all necessary node components
+- install all node components
 - `npm i`
 - start a PostgreSQL database system using docker images
 - `docker-compose up`
 -  start up your server (should launch website)
-- `node [app_mysql.js|app_pg.js]`
+- `SERVICE_BINDING_ROOT=${local_binding_path}/bindings_local node [app_mysql.js|app_pg.js]`
 
 ## Relevant resources
 

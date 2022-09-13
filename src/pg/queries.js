@@ -18,10 +18,14 @@ const createFruit = (req, rep) => {
         let fruit = {
             id: uuid.v4(),
             name: req.body.name,
+            quantity: req.body.quantity,
         }
         console.log('post called', fruit);
+        if (!fruit.name) {
+           throw new Error("missing fruit name.")
+        }
         try {
-            let res = await dbConn.query(`insert into fruit (id, name) values ($1, $2)`, [fruit.id, fruit.name]);
+            let res = await dbConn.query(`insert into fruit (id, name, quantity) values ($1, $2, $3)`, [fruit.id, fruit.name, fruit.quantity]);
             // await pgPool.end();
         } catch (err) {
             console.log(`fail to use db ${err.status}`);
@@ -76,9 +80,11 @@ const updateFruit = (req, rep) => {
         //
         // // Connect to database
         // const client = await pool2.connect();
-        console.log("updating", req.params.id, req.body.name);
-
-        dbConn.query("update fruit set name = $1 where id = $2", [req.body.name, req.params.id]).then(res => {
+        console.log("updating", req.params.id, req.body.name, req.body.quantity);
+        if (!req.body.name) {
+            throw new Error("missing fruit name.")
+        }
+        dbConn.query("update fruit set name = $1, quantity = $2 where id = $3", [req.body.name,req. body.quantity, req.params.id]).then(res => {
             rep.status(200).send(res.rows);
         }).catch(e => console.error(e.stack));
     })().catch((err) => console.log("err from async: " + err.stack));

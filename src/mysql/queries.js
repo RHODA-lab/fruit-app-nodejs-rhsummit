@@ -21,11 +21,15 @@ const createFruit = (req, rep) => {
         let fruit = {
             id: uuid.v4(),
             name: req.body.name,
+            quantity: req.body.quantity,
         }
         console.log('post called', fruit);
-        dbConn.execute(`insert into fruit (id, name)values (?, ?)`, [fruit.id, fruit.name],
+        if (!fruit.name) {
+            throw new Error("missing fruit name.")
+        }
+        dbConn.execute(`insert into fruit (id, name, quantity)values (?, ?, ?)`, [fruit.id, fruit.name, fruit.quantity],
             function(err, results ,fields){
-                console.log(err);
+                if (err) console.log(err);
                 rep.send(fruit);
             });
 
@@ -40,12 +44,6 @@ const listFruits = (req, rep) => {
             if (err) console.log(err);
             rep.status(200).send(results);
         });
-
-    // (async () => {
-    //     const dbConn = await mysql.createConnection(getMYSQLConnectConfig());
-    //     const res = await dbConn.execute('SELECT * FROM fruit');
-    //     rep.status(200).send(res);
-    // })().catch((err) => console.log("err from async: " + err.stack));
 }
 
 const deleteFruit = (req, rep) => {
@@ -61,9 +59,11 @@ const deleteFruit = (req, rep) => {
 
 const updateFruit = (req, rep) => {
     (async () => {
-        console.log("updating", req.params.id, req.body.name);
-
-        dbConn.query("update fruit set name = ? where id = ?", [req.body.name, req.params.id],
+        console.log("updating", req.params.id, req.body.name, req.body.quantity);
+        if (!req.body.name) {
+            throw new Error("missing fruit name.")
+        }
+        dbConn.query("update fruit set name = ?, quantity = ? where id = ?", [req.body.name, req.body.quantity, req.params.id],
             function (err, res, fields) {
                 if (err) console.log(err);
                 rep.status(200).send(res)

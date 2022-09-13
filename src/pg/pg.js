@@ -6,12 +6,14 @@ const assert = require('assert');
 function getPGConnectString() {
     let bindingInfo;
     try {
-        bindingInfo = pgBinding.getBinding('POSTGRESQL', 'pg-crdb')
+        bindingInfo = pgBinding.getBinding('POSTGRESQL', 'pg')
+        // bindingInfo['ssl']=true;
+        // delete bindingInfo['options']
         console.log(bindingInfo)
     } catch (err) {
         console.log(err)
     }
-    return bindingInfo.connectionString;
+    return bindingInfo;
 }
 
 module.exports = {
