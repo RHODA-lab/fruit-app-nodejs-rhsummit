@@ -38,7 +38,7 @@ oc apply -f k8s/deploy-nodejs-mysql.yaml
 
 ```
 
-### Commands to run currently:
+### Commands to run locally:
 
 - install all node components
 - `npm i`
