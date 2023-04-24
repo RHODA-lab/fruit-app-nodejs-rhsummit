@@ -26,6 +26,7 @@ const createFruit = (req, rep) => {
         }
         try {
             let res = await dbConn.query(`insert into fruit (id, name, quantity) values ($1, $2, $3)`, [fruit.id, fruit.name, fruit.quantity]);
+            let res_outbox = await dbConn.query(`insert into fruit-outbox (id, name, quantity) values ($1, $2, $3)`, [fruit.id, fruit.name, fruit.quantity]);
             // await pgPool.end();
         } catch (err) {
             console.log(`fail to use db ${err.status}`);
@@ -67,6 +68,10 @@ const deleteFruit = (req, rep) => {
             rep.status(200).send(res.rows);
             // client.release();
         }).catch(e => console.error(e.stack));
+        dbConn.query("delete from fruit-outbox where id = $1", [req.params.id]).then(res => {
+            rep.status(200).send(res.rows);
+            // client.release();
+        }).catch(e => console.error(e.stack));
     })().catch((err) => console.log("err from async: " + err.stack));
 
 }
@@ -85,6 +90,9 @@ const updateFruit = (req, rep) => {
             throw new Error("missing fruit name.")
         }
         dbConn.query("update fruit set name = $1, quantity = $2 where id = $3", [req.body.name,req. body.quantity, req.params.id]).then(res => {
+            rep.status(200).send(res.rows);
+        }).catch(e => console.error(e.stack));
+        dbConn.query("update fruit-outbox set name = $1, quantity = $2 where id = $3", [req.body.name,req. body.quantity, req.params.id]).then(res => {
             rep.status(200).send(res.rows);
         }).catch(e => console.error(e.stack));
     })().catch((err) => console.log("err from async: " + err.stack));
