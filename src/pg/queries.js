@@ -98,6 +98,26 @@ const deleteFruit = (req, rep) => {
 
 const updateFruit = (req, rep) => {
     (async () => {
+        console.log("updating", req.params.id, req.body.name, req.body.quantity);
+        let fruit = {
+            id: req.params.id,
+            name: req.body.name,
+            quantity: req.body.quantity,
+        }
+        if (!fruit.name) {
+            throw new Error("missing fruit name.")
+        }try{
+            let res = await dbConn.query("update fruit set name = $1, quantity = $2 where id = $3", [req.body.name,req. body.quantity, req.params.id]);
+            let res2 = await dbConn.query("update fruitoutbox set name = $1, quantity = $2 where id = $3", [req.body.name,req. body.quantity, req.params.id]);
+            rep.status(200).send(res.rows);
+        } catch(err){
+            console.log(`fail to use db ${err.status}`);
+        }
+    })().catch((err) => console.log("err from async: " + err.stack));
+}
+
+/*const updateFruit = (req, rep) => {
+    (async () => {
         // const connectionString = getPGConnectString();
         // console.log("connstr", connectionString, req.param.id);
         //
@@ -116,7 +136,7 @@ const updateFruit = (req, rep) => {
             rep.status(200).send(res.rows);
         }).catch(e => console.error(e.stack));
     })().catch((err) => console.log("err from async: " + err.stack));
-}
+}*/
 
 async function createDBClient() {
     const connectionString = getPGConnectString()
