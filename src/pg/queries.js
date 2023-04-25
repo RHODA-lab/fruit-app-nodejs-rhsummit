@@ -70,10 +70,11 @@ const deleteFruit = (req, rep) => {
         try{
             let res = await dbConn.query("delete from fruit where id = $1", [req.params.id]);
             let res2 = await dbConn.query("delete from fruitoutbox where id = $1", [req.params.id]);
+            rep.status(200).send(res.rows);
         } catch(err){
             console.log(`fail to use db ${err.status}`);
         }
-        rep.status(200).send(res.rows);
+        //rep.status(200).send(res.rows);
     })().catch((err) => console.log("err from async: " + err.stack));
 }
 
