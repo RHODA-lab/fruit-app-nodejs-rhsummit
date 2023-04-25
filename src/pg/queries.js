@@ -63,6 +63,24 @@ const listFruitsv2 = (req, rep) => {
 const deleteFruit = (req, rep) => {
     (async () => {
         console.log("deleting", req.params.id);
+        let id = req.params.id;
+        if(!id){
+            throw new Error("Missing fruit id ");
+        }
+        try{
+            let res = await dbConn.query("delete from fruit where id = $1", [req.params.id]);
+            let res2 = await dbConn.query("delete from fruitoutbox where id = $1", [req.params.id]);
+        } catch(err){
+            console.log(`fail to use db ${err.status}`);
+        }
+        rep.status(200).send(res.rows);
+    })().catch((err) => console.log("err from async: " + err.stack));
+}
+
+/*
+const deleteFruit = (req, rep) => {
+    (async () => {
+        console.log("deleting", req.params.id);
 
         dbConn.query("delete from fruit where id = $1", [req.params.id]).then(res => {
             rep.status(200).send(res.rows);
@@ -75,6 +93,7 @@ const deleteFruit = (req, rep) => {
     })().catch((err) => console.log("err from async: " + err.stack));
 
 }
+*/
 
 const updateFruit = (req, rep) => {
     (async () => {
