@@ -1,6 +1,12 @@
+const USERID = process.env.USERID;
+
+console.log("THE USERID in migrations/data is : " + USERID);
+
+var table = USERID+'.fruit'
+
 
 exports.seed = async function(knex) {
-    await knex('fruit').insert([
+    await knex(table).insert([
         {id: 'd37f4fae-b572-47b3-93e0-17daf798f9d5',
             name: 'Banana',
             quantity: '0',
