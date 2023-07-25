@@ -78,24 +78,6 @@ const deleteFruit = (req, rep) => {
     })().catch((err) => console.log("err from async: " + err.stack));
 }
 
-/*
-const deleteFruit = (req, rep) => {
-    (async () => {
-        console.log("deleting", req.params.id);
-
-        dbConn.query("delete from fruit where id = $1", [req.params.id]).then(res => {
-            rep.status(200).send(res.rows);
-            // client.release();
-        }).catch(e => console.error(e.stack));
-        dbConn.query("delete from fruitoutbox where id = $1", [req.params.id]).then(res => {
-            rep.status(200).send(res.rows);
-            // client.release();
-        }).catch(e => console.error(e.stack));
-    })().catch((err) => console.log("err from async: " + err.stack));
-
-}
-*/
-
 const updateFruit = (req, rep) => {
     (async () => {
         console.log("updating", req.params.id, req.body.name, req.body.quantity);
@@ -115,28 +97,6 @@ const updateFruit = (req, rep) => {
         }
     })().catch((err) => console.log("err from async: " + err.stack));
 }
-
-/*const updateFruit = (req, rep) => {
-    (async () => {
-        // const connectionString = getPGConnectString();
-        // console.log("connstr", connectionString, req.param.id);
-        //
-        // const pool2 = new Pool({connectionString});
-        //
-        // // Connect to database
-        // const client = await pool2.connect();
-        console.log("updating", req.params.id, req.body.name, req.body.quantity);
-        if (!req.body.name) {
-            throw new Error("missing fruit name.")
-        }
-        dbConn.query("update fruit set name = $1, quantity = $2 where id = $3", [req.body.name,req. body.quantity, req.params.id]).then(res => {
-            rep.status(200).send(res.rows);
-        }).catch(e => console.error(e.stack));
-        dbConn.query("update fruitoutbox set name = $1, quantity = $2 where id = $3", [req.body.name,req. body.quantity, req.params.id]).then(res => {
-            rep.status(200).send(res.rows);
-        }).catch(e => console.error(e.stack));
-    })().catch((err) => console.log("err from async: " + err.stack));
-}*/
 
 async function createDBClient() {
     const connectionString = getPGConnectString()
