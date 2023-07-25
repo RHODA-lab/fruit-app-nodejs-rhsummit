@@ -42,7 +42,7 @@ console.log(testBindings);
 console.log(" CA cert :::: ");
 console.log(testBindings.ssl.ca);
 
-/*
+
 const pool = new Pool({
     user: testBindings.user,
     password: testBindings.password,
@@ -51,10 +51,7 @@ const pool = new Pool({
     port: testBindings.port,
     sslmode: testBindings.sslmode,
     options: testBindings.options,
-    ssl: {
-        rejectUnauthorized: false,
-        ca: testBindings["ca"].toString()
-    }
+    ssl: testBindings.ssl.ca
 })
 
 //checking connection with pg driver to cockroachdb
@@ -79,7 +76,7 @@ pool.query(create_table, function(err, rows){
     });
 
 //END REDUNDANCY CHECK
-*/
+
 
 module.exports = {
     getPGConnectString,
