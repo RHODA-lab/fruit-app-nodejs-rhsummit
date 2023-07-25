@@ -66,7 +66,7 @@ pool.query(create_table, function(err, rows){
         }else{
             console.log(rows);
             console.log("Going to sleep for a bit zzzzz");
-            await sleep(1000);
+            sleep(1000);
             return;
         }
     });
