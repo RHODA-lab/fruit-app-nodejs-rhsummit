@@ -31,19 +31,19 @@ function getPGConnectString() {
 
 //REDUNDANCY CHECK
 
-var bindings = pgBinding.getBinding('POSTGRESQL', 'pg');
+var test_bindings = pgBinding.getBinding('POSTGRESQL', 'pg');
 
 const pool = new Pool({
-    user: bindings.user,
-    password: bindings.password,
-    host: bindings.host,
-    database: bindings.database,
-    port: bindings.port,
-    sslmode: bindings.sslmode,
-    options: bindings.options,
+    user: test_bindings.user,
+    password: test_bindings.password,
+    host: test_bindings.host,
+    database: test_bindings.database,
+    port: test_bindings.port,
+    sslmode: test_bindings.sslmode,
+    options: test_bindings.options,
     ssl: {
         rejectUnauthorized: false,
-        ca: bindings["root.crt"].toString()
+        ca: test_bindings["root.crt"].toString()
     }
 })
 
