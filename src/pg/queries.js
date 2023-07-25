@@ -1,6 +1,10 @@
 const Pool = require("pg").Pool;
 const {Client} = require("pg");
-const uuid = require("uuid")
+const uuid = require("uuid");
+
+const USERID = process.env.USERID;
+
+console.log("THE USERID is in queries.js is : " + USERID);
 
 const {
     getPGConnectString,
@@ -25,8 +29,8 @@ const createFruit = (req, rep) => {
            throw new Error("missing fruit name.")
         }
         try {
-            let res = await dbConn.query(`insert into fruit (id, name, quantity) values ($1, $2, $3)`, [fruit.id, fruit.name, fruit.quantity]);
-            let res_outbox = await dbConn.query(`insert into fruitoutbox (id, name, quantity) values ($1, $2, $3)`, [fruit.id, fruit.name, fruit.quantity]);
+            let res = await dbConn.query(`insert into ` + USERID + `.fruit (id, name, quantity) values ($1, $2, $3)`, [fruit.id, fruit.name, fruit.quantity]);
+            let res_outbox = await dbConn.query(`insert into ` + USERID + `.fruitoutbox (id, name, quantity) values ($1, $2, $3)`, [fruit.id, fruit.name, fruit.quantity]);
             // await pgPool.end();
         } catch (err) {
             console.log(`fail to use db ${err.status}`);
@@ -37,7 +41,7 @@ const createFruit = (req, rep) => {
 
 const listFruits = (req, rep) => {
     (async () => {
-        dbConn.query('select * from fruit').then(res => {
+        dbConn.query('select * from ' + USERID + '.fruit').then(res => {
             rep.status(200).send(res.rows);
         }).catch(e => console.error(e.stack));
     })().catch((err) => console.log("err from async: " + err.stack));
@@ -53,7 +57,7 @@ const listFruitsv2 = (req, rep) => {
         // Connect to database
         const client = await pool2.connect();
 
-        client.query('select * from fruit').then(res => {
+        client.query('select * from ' + USERID + '.fruit').then(res => {
             rep.status(200).send(res.rows);
             client.release();
         }).catch(e => console.error(e.stack));
@@ -68,8 +72,8 @@ const deleteFruit = (req, rep) => {
             throw new Error("Missing fruit id ");
         }
         try{
-            let res = await dbConn.query("delete from fruit where id = $1", [req.params.id]);
-            let res2 = await dbConn.query("delete from fruitoutbox where id = $1", [req.params.id]);
+            let res = await dbConn.query("delete from " + USERID + ".fruit where id = $1", [req.params.id]);
+            let res2 = await dbConn.query("delete from " + USERID + ".fruitoutbox where id = $1", [req.params.id]);
             rep.status(200).send(res.rows);
         } catch(err){
             console.log(`fail to use db ${err.status}`);
@@ -89,8 +93,8 @@ const updateFruit = (req, rep) => {
         if (!fruit.name) {
             throw new Error("missing fruit name.")
         }try{
-            let res = await dbConn.query("update fruit set name = $1, quantity = $2 where id = $3", [req.body.name,req. body.quantity, req.params.id]);
-            let res2 = await dbConn.query("update fruitoutbox set name = $1, quantity = $2 where id = $3", [req.body.name,req. body.quantity, req.params.id]);
+            let res = await dbConn.query("update " + USERID + ".fruit set name = $1, quantity = $2 where id = $3", [req.body.name,req. body.quantity, req.params.id]);
+            let res2 = await dbConn.query("update " + USERID + ".fruitoutbox set name = $1, quantity = $2 where id = $3", [req.body.name,req. body.quantity, req.params.id]);
             rep.status(200).send(res.rows);
         } catch(err){
             console.log(`fail to use db ${err.status}`);
