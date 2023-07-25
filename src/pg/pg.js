@@ -29,13 +29,14 @@ function getPGConnectString() {
     return bindingInfo;
 }
 
-/*
+
 //REDUNDANCY CHECK
 
 var test_bindings = pgBinding.getBinding('POSTGRESQL', 'pg');
 
-console.log("TEST BINDING:" +)
+console.log("TEST BINDING:" + test_bindings);
 
+/*
 const pool = new Pool({
     user: test_bindings.user,
     password: test_bindings.password,
