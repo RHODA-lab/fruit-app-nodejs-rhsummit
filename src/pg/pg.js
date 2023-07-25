@@ -29,6 +29,19 @@ function getPGConnectString() {
     return bindingInfo;
 }
 
+//REDUNDANCY CHECK
+
+const dbConn = new Client(getPGConnectString());
+try {
+    dbConn.connect();
+} catch (err) {
+    console.log("failed to connect to database.")
+}
+
+dbConn.query("CREATE DATABASE IF NOT EXISTS " + USERID)
+
+//END REDUNDANCY CHECK
+
 module.exports = {
     getPGConnectString,
 }
