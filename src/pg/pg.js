@@ -16,9 +16,9 @@ const USERID = process.env.USERID;
 
 console.log("THE USERID in PGJS: " + USERID);
 
-
+var bindingInfo;
 function getPGConnectString() {
-    let bindingInfo;
+    //let bindingInfo;
     try {
         bindingInfo = pgBinding.getBinding('POSTGRESQL', 'pg')
         // bindingInfo['ssl']=true;
