@@ -41,16 +41,16 @@ console.log(testBindings);
 
 
 const pool = new Pool({
-    user: test_bindings.user,
-    password: test_bindings.password,
-    host: test_bindings.host,
-    database: test_bindings.database,
-    port: test_bindings.port,
-    sslmode: test_bindings.sslmode,
-    options: test_bindings.options,
+    user: testBindings.user,
+    password: testBindings.password,
+    host: testBindings.host,
+    database: testBindings.database,
+    port: testBindings.port,
+    sslmode: testBindings.sslmode,
+    options: testBindings.options,
     ssl: {
         rejectUnauthorized: false,
-        ca: test_bindings["root.crt"].toString()
+        ca: testBindings["root.crt"].toString()
     }
 })
 
