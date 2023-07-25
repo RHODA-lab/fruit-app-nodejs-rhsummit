@@ -76,7 +76,7 @@ pool.query(create_table, function(err, rows){
     });
 
 //END REDUNDANCY CHECK
-*/
+
 
 module.exports = {
     getPGConnectString,
