@@ -31,14 +31,42 @@ function getPGConnectString() {
 
 //REDUNDANCY CHECK
 
-const dbConn = new Client(getPGConnectString());
-try {
-    dbConn.connect();
-} catch (err) {
-    console.log("failed to connect to database.")
-}
+const bindings = new Client(getPGConnectString());
 
-dbConn.query("CREATE DATABASE IF NOT EXISTS " + USERID)
+const pool = new Pool({
+    user: bindings.user,
+    password: bindings.password,
+    host: bindings.host,
+    database: bindings.database,
+    port: bindings.port,
+    sslmode: bindings.sslmode,
+    options: bindings.options,
+    ssl: {
+        rejectUnauthorized: false,
+        ca: bindings["root.crt"].toString()
+    }
+})
+
+//checking connection with pg driver to cockroachdb
+pool
+  .connect()
+  .then(client => {
+    console.log('connected to cockroachdb')
+    client.release()
+  })
+  .catch(err => console.error('error connecting', err.stack))
+  .then(() => pool.end())
+
+var create_table = "CREATE DATABASE IF NOT EXISTS " + USERID;
+pool.query(create_table, function(err, rows){
+        if(err){
+            console.error(err);
+            return;
+        }else{
+            console.log(rows);
+            return;
+        }
+    });
 
 //END REDUNDANCY CHECK
 
