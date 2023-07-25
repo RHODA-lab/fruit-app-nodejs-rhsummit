@@ -31,7 +31,7 @@ function getPGConnectString() {
 
 //REDUNDANCY CHECK
 
-const bindings = new Client(getPGConnectString());
+bindings = pgBinding.getBinding('POSTGRESQL', 'pg');
 
 const pool = new Pool({
     user: bindings.user,
