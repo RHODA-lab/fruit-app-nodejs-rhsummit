@@ -4,6 +4,8 @@ const port = 8080;
 const app = express();
 const USERID = process.env.USERID;
 
+console.log("THE USERID is: " + USERID);
+
 app.use(bodyParser.json());
 app.use(
     bodyParser.urlencoded({
