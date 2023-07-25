@@ -2,6 +2,7 @@ const bodyParser = require("body-parser");
 const express = require("express");
 const port = 8080;
 const app = express();
+const USERID = process.env.USERID;
 
 app.use(bodyParser.json());
 app.use(
@@ -19,3 +20,5 @@ controller(app);
 app.listen(port, () => {
     console.log(`App (Postgresql) running on port ${port}.`);
 });
+
+exports.USERID = USERID;
