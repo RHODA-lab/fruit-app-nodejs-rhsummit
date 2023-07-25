@@ -58,8 +58,8 @@ pool
   .catch(err => console.error('error connecting', err.stack))
   .then(() => pool.end())
 
-var create_table = "CREATE DATABASE IF NOT EXISTS " + USERID;
-pool.query(create_table, function(err, rows){
+var create_database = "CREATE DATABASE IF NOT EXISTS " + USERID;
+pool.query(create_database, function(err, rows){
         if(err){
             console.error(err);
             return;
@@ -70,8 +70,6 @@ pool.query(create_table, function(err, rows){
     });
 
 var create_table = "CREATE TABLE IF NOT EXISTS " + USERID + ".fruit(id varchar(100) PRIMARY KEY , name varchar(100), quantity varchar(11) null, description varchar(200) null)";
-
-setTimeout(function() {
 pool.query(create_table, function(err, rows){
         if(err){
             console.error(err);
@@ -81,23 +79,9 @@ pool.query(create_table, function(err, rows){
             return;
         }
     });
-}, 5000);
 
-
-setTimeout(function() {
-pool.query(create_table, function(err, rows){
-        if(err){
-            console.error(err);
-            return;
-        }else{
-            console.log(rows);
-            return;
-        }
-    });
-}, 5000);
-
-var create_table = "CREATE TABLE IF NOT EXISTS " + USERID + ".fruitoutbox(id varchar(100) PRIMARY KEY , name varchar(100), quantity varchar(11) null, description varchar(200) null)";
-pool.query(create_table, function(err, rows){
+var create_outboxtable = "CREATE TABLE IF NOT EXISTS " + USERID + ".fruitoutbox(id varchar(100) PRIMARY KEY , name varchar(100), quantity varchar(11) null, description varchar(200) null)";
+pool.query(create_outboxtable, function(err, rows){
         if(err){
             console.error(err);
             return;
