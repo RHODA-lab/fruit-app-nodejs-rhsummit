@@ -5,7 +5,10 @@ const assert = require('assert');
 
 //var app_pg = require('../../app_pg');
 //var USER_ID = app_pg.USERID;
-const {USERID} = require('../../app_pg');
+
+//const {USERID} = require('../../app_pg');
+
+import USERID from '../../app_pg.js';
 
 function getPGConnectString() {
     let bindingInfo;
