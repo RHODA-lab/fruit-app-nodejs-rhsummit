@@ -23,4 +23,5 @@ app.listen(port, () => {
     console.log(`App (Postgresql) running on port ${port}.`);
 });
 
-exports.USERID = USERID;
+//exports.USERID = USERID;
+module.exports = {USERID};
