@@ -2,7 +2,8 @@
  * @param { import("knex").Knex } knex
  * @returns { Promise<void> }
  */
-var USER_ID = process.env.USER_ID;
+var app_pg = require('../../app_pg');
+var USER_ID = app_pg.USERID;
 
 exports.up = async function(knex) {
  console.log("The USERID is : " + USER_ID);
