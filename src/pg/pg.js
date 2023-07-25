@@ -7,7 +7,7 @@ const assert = require('assert');
 //var USER_ID = app_pg.USERID;
 
 const USERID = require('../../app_pg.js');
-console.log("This is the USERID from PJ.JS " + USERID);
+console.log("This is the USERID from PJ.JS " + USERID.toString());
 
 //import USERID from '../../app_pg.js';
 
