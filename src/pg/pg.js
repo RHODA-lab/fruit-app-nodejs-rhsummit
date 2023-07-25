@@ -39,7 +39,7 @@ testBindings = pgBinding.getBinding('POSTGRESQL', 'pg')
 console.log("TEST BINDING:  ");
 console.log(testBindings);
 
-/*
+
 const pool = new Pool({
     user: testBindings.user,
     password: testBindings.password,
@@ -50,7 +50,7 @@ const pool = new Pool({
     options: testBindings.options,
     ssl: {
         rejectUnauthorized: false,
-        ca: testBindings["root.crt"].toString()
+        ca: testBindings["ca"].toString()
     }
 })
 
