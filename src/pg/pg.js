@@ -16,9 +16,9 @@ const USERID = process.env.USERID;
 
 console.log("THE USERID in PGJS: " + USERID);
 
-var bindingInfo;
+/* ADD Block Back
 function getPGConnectString() {
-    //let bindingInfo;
+    let bindingInfo;
     try {
         bindingInfo = pgBinding.getBinding('POSTGRESQL', 'pg')
         // bindingInfo['ssl']=true;
@@ -29,13 +29,13 @@ function getPGConnectString() {
     }
     return bindingInfo;
 }
-
+*/
 
 //REDUNDANCY CHECK
 
 
-
-console.log("TEST BINDING:" + bindingInfo);
+testBindings = pgBinding.getBinding('POSTGRESQL', 'pg')
+console.log("TEST BINDING:" + testBindings);
 
 /*
 const pool = new Pool({
