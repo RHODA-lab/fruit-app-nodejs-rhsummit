@@ -1,7 +1,7 @@
 FROM registry.access.redhat.com/ubi8/nodejs-14:1 AS BUILD_IMAGE
 
 USER 65532:65532
-ENV USERID=${USERID}
+ENV USERID ${USERID}
 
 WORKDIR /app
 COPY ./package*.json ./
@@ -14,4 +14,4 @@ USER 0
 RUN npm i
 
 EXPOSE 8080
-CMD ["USERID=${USERID}", "node", "app_pg.js"]
+CMD ["node", "app_pg.js"]
