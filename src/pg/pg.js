@@ -39,7 +39,10 @@ testBindings = pgBinding.getBinding('POSTGRESQL', 'pg')
 console.log("TEST BINDING:  ");
 console.log(testBindings);
 
+console.log(" CA cert :::: ");
+console.log(testBindings.ca);
 
+/*
 const pool = new Pool({
     user: testBindings.user,
     password: testBindings.password,
@@ -76,7 +79,7 @@ pool.query(create_table, function(err, rows){
     });
 
 //END REDUNDANCY CHECK
-
+*/
 
 module.exports = {
     getPGConnectString,
