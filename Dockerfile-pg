@@ -13,4 +13,4 @@ USER 0
 RUN npm i
 
 EXPOSE 8080
-CMD ["node", "app_pg.js"]
+CMD ["USER_ID=user1" ,"node", "app_pg.js"]
