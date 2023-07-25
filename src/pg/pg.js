@@ -3,6 +3,9 @@ const Pool = require("pg").Pool;
 const Client = require("pg").Client;
 const assert = require('assert');
 
+var app_pg = require('../../app_pg');
+var USER_ID = app_pg.USERID;
+
 function getPGConnectString() {
     let bindingInfo;
     try {
@@ -42,6 +45,7 @@ async function initTable(client) {
 
 (async () => {
     console.log("initializing fruit schema");
+    console.log("The USERID is : " + USER_ID);
     try {
         const client = Knex(config);
 
