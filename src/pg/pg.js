@@ -51,7 +51,7 @@ const pool = new Pool({
     port: testBindings.port,
     sslmode: testBindings.sslmode,
     options: testBindings.options,
-    ssl: testBindings.ssl.ca
+    ca: testBindings.ssl.ca
 })
 
 //checking connection with pg driver to cockroachdb
