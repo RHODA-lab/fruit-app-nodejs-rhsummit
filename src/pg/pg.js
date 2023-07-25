@@ -40,7 +40,7 @@ console.log("TEST BINDING:  ");
 console.log(testBindings);
 
 console.log(" CA cert :::: ");
-console.log(testBindings.ca);
+console.log(testBindings.ssl.ca);
 
 /*
 const pool = new Pool({
