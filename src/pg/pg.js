@@ -16,7 +16,7 @@ const USERID = process.env.USERID;
 
 console.log("THE USERID in PGJS: " + USERID);
 
-/* ADD Block Back
+
 function getPGConnectString() {
     let bindingInfo;
     try {
@@ -29,7 +29,7 @@ function getPGConnectString() {
     }
     return bindingInfo;
 }
-*/
+
 
 //REDUNDANCY CHECK
 
