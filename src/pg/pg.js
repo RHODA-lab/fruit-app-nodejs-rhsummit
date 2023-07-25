@@ -29,9 +29,12 @@ function getPGConnectString() {
     return bindingInfo;
 }
 
+/*
 //REDUNDANCY CHECK
 
 var test_bindings = pgBinding.getBinding('POSTGRESQL', 'pg');
+
+console.log("TEST BINDING:" +)
 
 const pool = new Pool({
     user: test_bindings.user,
@@ -69,6 +72,7 @@ pool.query(create_table, function(err, rows){
     });
 
 //END REDUNDANCY CHECK
+*/
 
 module.exports = {
     getPGConnectString,
