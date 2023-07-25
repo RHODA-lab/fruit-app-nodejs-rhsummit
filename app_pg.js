@@ -24,4 +24,5 @@ app.listen(port, () => {
 });
 
 //exports.USERID = USERID;
-module.exports = {USERID};
+//module.exports = {USERID};
+export default USERID;
