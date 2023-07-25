@@ -6,11 +6,15 @@ const assert = require('assert');
 //var app_pg = require('../../app_pg');
 //var USER_ID = app_pg.USERID;
 
-const USERID = require('../../app_pg.js');
-console.log("This is the USERID from PJ.JS " + USERID.toString());
-console.log(typeof USERID);
+//const USERID = require('../../app_pg.js');
+//console.log("This is the USERID from PJ.JS " + USERID.toString());
+//console.log(typeof USERID);
 
 //import USERID from '../../app_pg.js';
+
+const USERID = process.env.USERID;
+
+console.log("THE USERID in PGJS: " + USERID);
 
 function getPGConnectString() {
     let bindingInfo;
