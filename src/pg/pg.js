@@ -23,7 +23,7 @@ function getPGConnectString() {
         bindingInfo = pgBinding.getBinding('POSTGRESQL', 'pg')
         // bindingInfo['ssl']=true;
         // delete bindingInfo['options']
-        console.log(bindingInfo)
+        console.log("This is BindingInfo: " + bindingInfo);
     } catch (err) {
         console.log(err)
     }
