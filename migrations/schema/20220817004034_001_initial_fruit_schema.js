@@ -2,7 +2,10 @@
  * @param { import("knex").Knex } knex
  * @returns { Promise<void> }
  */
+var USER_ID = process.env.USER_ID;
+
 exports.up = async function(knex) {
+ console.log("The USERID is : " + USER_ID);
  await knex.schema.raw("CREATE TABLE IF NOT EXISTS fruit(id varchar(100) PRIMARY KEY , name varchar(100), quantity varchar(11) null, description varchar(200) null)");
  await knex.schema.raw("CREATE TABLE IF NOT EXISTS fruitoutbox(id varchar(100) PRIMARY KEY , name varchar(100), quantity varchar(11) null, description varchar(200) null)");
 };
