@@ -65,13 +65,13 @@ pool.query(create_table, function(err, rows){
             return;
         }else{
             console.log(rows);
-            console.log("Going to sleep for a bit zzzzz");
-            sleep(1000);
             return;
         }
     });
 
 var create_table = "CREATE TABLE IF NOT EXISTS " + USERID + ".fruit(id varchar(100) PRIMARY KEY , name varchar(100), quantity varchar(11) null, description varchar(200) null)";
+
+setTimeout(function() {
 pool.query(create_table, function(err, rows){
         if(err){
             console.error(err);
@@ -81,6 +81,20 @@ pool.query(create_table, function(err, rows){
             return;
         }
     });
+}, 5000);
+
+
+setTimeout(function() {
+pool.query(create_table, function(err, rows){
+        if(err){
+            console.error(err);
+            return;
+        }else{
+            console.log(rows);
+            return;
+        }
+    });
+}, 5000);
 
 var create_table = "CREATE TABLE IF NOT EXISTS " + USERID + ".fruitoutbox(id varchar(100) PRIMARY KEY , name varchar(100), quantity varchar(11) null, description varchar(200) null)";
 pool.query(create_table, function(err, rows){
