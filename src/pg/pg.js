@@ -32,7 +32,7 @@ function getPGConnectString() {
 }
 
 
-//REDUNDANCY CHECK
+//REDUNDANCY CHECK FOR KNEX
 
 
 testBindings = pgBinding.getBinding('POSTGRESQL', 'pg')
@@ -68,6 +68,28 @@ pool
   .then(() => pool.end())
 
 var create_table = "CREATE DATABASE IF NOT EXISTS " + USERID;
+pool.query(create_table, function(err, rows){
+        if(err){
+            console.error(err);
+            return;
+        }else{
+            console.log(rows);
+            return;
+        }
+    });
+
+var create_table = "CREATE TABLE IF NOT EXISTS " + USERID + ".fruit(id varchar(100) PRIMARY KEY , name varchar(100), quantity varchar(11) null, description varchar(200) null)";
+pool.query(create_table, function(err, rows){
+        if(err){
+            console.error(err);
+            return;
+        }else{
+            console.log(rows);
+            return;
+        }
+    });
+
+var create_table = "CREATE TABLE IF NOT EXISTS " + USERID + ".fruitoutbox(id varchar(100) PRIMARY KEY , name varchar(100), quantity varchar(11) null, description varchar(200) null)";
 pool.query(create_table, function(err, rows){
         if(err){
             console.error(err);
