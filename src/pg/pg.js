@@ -31,7 +31,7 @@ function getPGConnectString() {
 
 //REDUNDANCY CHECK
 
-bindings = pgBinding.getBinding('POSTGRESQL', 'pg');
+var bindings = pgBinding.getBinding('POSTGRESQL', 'pg');
 
 const pool = new Pool({
     user: bindings.user,
