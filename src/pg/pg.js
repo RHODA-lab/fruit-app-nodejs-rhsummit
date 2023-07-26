@@ -132,7 +132,7 @@ async function fruitOutboxTable() {
     console.log("Wait ended");  
   }
 }
-
+fruitOutboxTable();
 /*
 var create_outboxtable = "CREATE TABLE IF NOT EXISTS " + USERID + ".fruitoutbox(id varchar(100) PRIMARY KEY , name varchar(100), quantity varchar(11) null, description varchar(200) null)";
 //setTimeout(function() {
