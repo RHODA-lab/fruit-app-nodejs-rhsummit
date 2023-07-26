@@ -49,6 +49,7 @@ const pool = new Pool({
 })
 
 //checking connection with pg driver to cockroachdb
+/*
 pool
   .connect()
   .then(client => {
@@ -57,6 +58,7 @@ pool
   })
   .catch(err => console.error('error connecting', err.stack))
   .then(() => pool.end())
+*/
 
 var create_database = "CREATE DATABASE IF NOT EXISTS " + USERID;
 pool.query(create_database, function(err, rows){
@@ -65,37 +67,41 @@ pool.query(create_database, function(err, rows){
             return;
         }else{
             console.log(rows);
+            console.log("Database created");
             return;
         }
     });
+console.log("Database created")
 
 var create_table = "CREATE TABLE IF NOT EXISTS " + USERID + ".fruit(id varchar(100) PRIMARY KEY , name varchar(100), quantity varchar(11) null, description varchar(200) null)";
-setTimeout(function() {
+//setTimeout(function() {
 pool.query(create_table, function(err, rows){
         if(err){
             console.error(err);
             return;
         }else{
             console.log(rows);
+            console.log("Fruit table created");
             return;
         }
     });
-}, 4000);
+//}, 4000);
 
 
 
 var create_outboxtable = "CREATE TABLE IF NOT EXISTS " + USERID + ".fruitoutbox(id varchar(100) PRIMARY KEY , name varchar(100), quantity varchar(11) null, description varchar(200) null)";
-setTimeout(function() {
+//setTimeout(function() {
 pool.query(create_outboxtable, function(err, rows){
         if(err){
             console.error(err);
             return;
         }else{
             console.log(rows);
+            console.log("FruitOutbox table created");
             return;
         }
     });
-}, 4000);
+//}, 4000);
 //END REDUNDANCY CHECK
 
 
