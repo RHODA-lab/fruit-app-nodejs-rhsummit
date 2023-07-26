@@ -79,6 +79,7 @@ async function sleep(ms) {
   });
 }
 
+/*
 async function ledLoop() {
   for (i=0; i < 1; i++) {
     console.log("Wait started");  
@@ -88,11 +89,14 @@ async function ledLoop() {
 }
 
 ledLoop();
-
+*/
 
 var create_table = "CREATE TABLE IF NOT EXISTS " + USERID + ".fruit(id varchar(100) PRIMARY KEY , name varchar(100), quantity varchar(11) null, description varchar(200) null)";
-//setTimeout(function() {
-pool.query(create_table, function(err, rows){
+async function fruitTable() {
+  for (i=0; i < 1; i++) {
+    console.log("Wait started");  
+    await sleep(1500);
+    pool.query(create_table, function(err, rows){
         if(err){
             console.error(err);
             return;
@@ -101,11 +105,35 @@ pool.query(create_table, function(err, rows){
             console.log("Fruit table created");
             return;
         }
-    });
+    });  
+    console.log("Wait ended");  
+  }
+}
+
+fruitTable();
+
 //}, 4000);
 
+var create_outboxtable = "CREATE TABLE IF NOT EXISTS " + USERID + ".fruitoutbox(id varchar(100) PRIMARY KEY , name varchar(100), quantity varchar(11) null, description varchar(200) null)";
+async function fruitOutboxTable() {
+  for (i=0; i < 1; i++) {
+    console.log("Wait started");  
+    await sleep(1500);
+    pool.query(create_outboxtable, function(err, rows){
+        if(err){
+            console.error(err);
+            return;
+        }else{
+            console.log(rows);
+            console.log("Fruit Outbox table created");
+            return;
+        }
+    });  
+    console.log("Wait ended");  
+  }
+}
 
-
+/*
 var create_outboxtable = "CREATE TABLE IF NOT EXISTS " + USERID + ".fruitoutbox(id varchar(100) PRIMARY KEY , name varchar(100), quantity varchar(11) null, description varchar(200) null)";
 //setTimeout(function() {
 pool.query(create_outboxtable, function(err, rows){
@@ -118,6 +146,7 @@ pool.query(create_outboxtable, function(err, rows){
             return;
         }
     });
+ */   
 //}, 4000);
 //END REDUNDANCY CHECK
 
@@ -142,12 +171,16 @@ const config = {
 // Connect to database
 
 async function initTable(client) {
+    console.log("Migration wait started");
+    await sleep(4500);        //new
+    console.log("Migration wait ended");
     await client.migrate.latest();
     await client.seed.run();
 }
 
 (async () => {
     console.log("initializing fruit schema");
+    await sleep(4500); //new
     console.log("The USERID is : " + USERID);
     try {
         const client = Knex(config);
