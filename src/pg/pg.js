@@ -95,7 +95,7 @@ var create_table = "CREATE TABLE IF NOT EXISTS " + USERID + ".fruit(id varchar(1
 async function fruitTable() {
   for (i=0; i < 1; i++) {
     console.log("Wait started");  
-    await sleep(1500);
+    await sleep(1000);
     pool.query(create_table, function(err, rows){
         if(err){
             console.error(err);
@@ -172,7 +172,7 @@ const config = {
 
 async function initTable(client) {
     console.log("Migration wait started");
-    await sleep(4500);        //new
+    await sleep(7500);        //new
     console.log("Migration wait ended");
     await client.migrate.latest();
     await client.seed.run();
@@ -180,7 +180,7 @@ async function initTable(client) {
 
 (async () => {
     console.log("initializing fruit schema");
-    await sleep(4500); //new
+    await sleep(7500); //new
     console.log("The USERID is : " + USERID);
     try {
         const client = Knex(config);
