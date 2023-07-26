@@ -73,6 +73,23 @@ pool.query(create_database, function(err, rows){
     });
 console.log("Database created")
 
+async function sleep(ms) {
+  return new Promise(resolve => {
+    setTimeout(resolve, ms);
+  });
+}
+
+async function ledLoop() {
+  for (i=0; i < 1; i++) {
+    console.log("Wait started");  
+    await sleep(2500);
+    console.log("Wait ended");  
+  }
+}
+
+ledLoop();
+
+
 var create_table = "CREATE TABLE IF NOT EXISTS " + USERID + ".fruit(id varchar(100) PRIMARY KEY , name varchar(100), quantity varchar(11) null, description varchar(200) null)";
 //setTimeout(function() {
 pool.query(create_table, function(err, rows){
