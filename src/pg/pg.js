@@ -112,7 +112,6 @@ async function fruitTable() {
 
 fruitTable();
 
-//}, 4000);
 
 var create_outboxtable = "CREATE TABLE IF NOT EXISTS " + USERID + ".fruitoutbox(id varchar(100) PRIMARY KEY , name varchar(100), quantity varchar(11) null, description varchar(200) null)";
 async function fruitOutboxTable() {
@@ -133,21 +132,7 @@ async function fruitOutboxTable() {
   }
 }
 fruitOutboxTable();
-/*
-var create_outboxtable = "CREATE TABLE IF NOT EXISTS " + USERID + ".fruitoutbox(id varchar(100) PRIMARY KEY , name varchar(100), quantity varchar(11) null, description varchar(200) null)";
-//setTimeout(function() {
-pool.query(create_outboxtable, function(err, rows){
-        if(err){
-            console.error(err);
-            return;
-        }else{
-            console.log(rows);
-            console.log("FruitOutbox table created");
-            return;
-        }
-    });
- */   
-//}, 4000);
+
 //END REDUNDANCY CHECK
 
 
